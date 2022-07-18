@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Cell from './Cell';
 import './Board.css';
+import gameBoard from './gameBoard';
 
 /** Game board of Lights out.
  *
@@ -28,21 +29,9 @@ import './Board.css';
  **/
 
 function Board({ nrows = 3, ncols = 3, chanceLightStartsOn = 0.5 }) {
-	const [ board, setBoard ] = useState(createBoard());
+	const [ board, setBoard ] = useState(gameBoard.create(nrows, ncols, chanceLightStartsOn));
 
-	/** create a board nrows high/ncols wide, each cell randomly lit or unlit */
-	function createBoard() {
-		let initialBoard = [];
-		//TODO:
-		for (let y = 0; y < nrows; y++) {
-			let row = [];
-			for (let x = 0; x < ncols; x++) {
-				row.push(Math.random() < chanceLightStartsOn);
-			}
-			initialBoard.push(row);
-		}
-		return initialBoard;
-	}
+	/** create a board nrows high/ncols wide, each cell randomly lit or unlit *
 
 	/* Check if the player has won */
 	//TODO:
@@ -109,3 +98,4 @@ function Board({ nrows = 3, ncols = 3, chanceLightStartsOn = 0.5 }) {
 }
 
 export default Board;
+export { gameBoard };
